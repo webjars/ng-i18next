@@ -12,15 +12,15 @@
 	<packaging>jar</packaging>
 	<groupId>org.webjars</groupId>
 	<artifactId>ng-i18next</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<name>ng i18next</name>
+	<version>0.2.6-SNAPSHOT</version>
+	<name>ng-i18next</name>
 	<description>AngularJS module of i18next</description>
 	<url>http://webjars.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<ng-i18next.version>1.0.0</ng-i18next.version>
-		<ng-i18next.sourceUrl>https://github.com/archer96/ng-i18next/archive</ng-i18next.sourceUrl>
+		<ng-i18next.version>0.2.6</ng-i18next.version>
+		<ng-i18next.sourceUrl>https://raw.github.com/archer96/ng-i18next/v${ng-i18next.version}/releases/v${ng-i18next.version}</ng-i18next.sourceUrl>
 		<destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${ng-i18next.version}</destDir>
 	</properties>
 
@@ -41,9 +41,9 @@
 	</dependencies>
 
 	<scm>
-		<url>https://github.com/smallg/ng-i18next</url>
-		<connection>scm:git:https://github.com/smallg/ng-i18next.git</connection>
-		<developerConnection>scm:git:https://github.com/smallg/ng-i18next.git</developerConnection>
+		<url>https://github.com/webjars/ng-i18next</url>
+		<connection>scm:git:https://github.com/webjars/ng-i18next.git</connection>
+		<developerConnection>scm:git:https://github.com/webjars/ng-i18next.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -63,38 +63,27 @@
 				<version>1.0-beta-4</version>
 				<executions>
 					<execution>
+                                                <id>download-js</id>
 						<phase>process-resources</phase>
 						<goals>
 							<goal>download-single</goal>
 						</goals>
 						<configuration>
 							<url>${ng-i18next.sourceUrl}</url>
-							<fromFile>master.zip</fromFile>
-							<toFile>${project.build.directory}/${project.artifactId}.zip</toFile>
+							<fromFile>ng-i18next.js</fromFile>
+							<toDir>${destDir}</toDir>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
 					<execution>
+                                                <id>download-min-js</id>
 						<phase>process-resources</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>download-single</goal>
 						</goals>
 						<configuration>
-							<target>
-								<echo message="unzip archive" />
-								<unzip src="${project.build.directory}/${project.artifactId}.zip"
-									dest="${project.build.directory}" />
-								<echo message="moving resources" />
-								<copy tofile="${destDir}/ng-i18next.js"
-									file="${project.build.directory}/ng-i18next-master/dist/ng-i18next.js"></copy>
-								<copy tofile="${destDir}/ng-i18next.min.js"
-									file="${project.build.directory}/ng-i18next-master/dist/ng-i18next.min.js"></copy>
-							</target>
+							<url>${ng-i18next.sourceUrl}</url>
+							<fromFile>ng-i18next.min.js</fromFile>
+							<toDir>${destDir}</toDir>
 						</configuration>
 					</execution>
 				</executions>
