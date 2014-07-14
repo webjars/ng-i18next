@@ -11,14 +11,14 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ng-i18next</artifactId>
-    <version>0.2.10-SNAPSHOT</version>
+    <version>0.3.2-SNAPSHOT</version>
     <name>ng-i18next</name>
     <description>AngularJS module of i18next</description>
     <url>http://webjars.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <ng-i18next.version>0.2.9</ng-i18next.version>
+        <ng-i18next.version>0.3.2</ng-i18next.version>
         <ng-i18next.sourceUrl>https://raw.github.com/archer96/ng-i18next/v${ng-i18next.version}/releases/v${ng-i18next.version}</ng-i18next.sourceUrl>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${ng-i18next.version}</destDir>
     </properties>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
-            <version>1.1.4</version>
+            <version>1.2.19</version>
         </dependency>
     </dependencies>
 
@@ -62,7 +62,7 @@
                 <version>1.0-beta-4</version>
                 <executions>
                     <execution>
-                                                <id>download-js</id>
+                        <id>download-js</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>download-single</goal>
@@ -74,7 +74,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                                                <id>download-min-js</id>
+                        <id>download-min-js</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>download-single</goal>
@@ -90,14 +90,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.4.2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.9</version>
-                    </dependency>
-                </dependencies>
+                <version>2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>sonatype-nexus-staging</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>
