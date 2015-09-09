@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ng-i18next</artifactId>
-    <version>0.5.2-SNAPSHOT</version>
+    <version>0.5.2</version>
     <name>ng-i18next</name>
     <description>AngularJS module of i18next</description>
     <url>http://webjars.org</url>
@@ -43,7 +43,7 @@
         <url>https://github.com/webjars/ng-i18next</url>
         <connection>scm:git:https://github.com/webjars/ng-i18next.git</connection>
         <developerConnection>scm:git:https://github.com/webjars/ng-i18next.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>ng-i18next-0.5.2</tag>
     </scm>
 
     <developers>
@@ -66,13 +66,13 @@
                         <goals><goal>run</goal></goals>
                         <configuration>
                             <target>
-                                <echo message="download archive"/>
-                                <get src="${ng-i18next.sourceUrl}" dest="${project.build.directory}/${project.artifactId}.zip"/>
-                                <echo message="unzip archive"/>
-                                <unzip src="${project.build.directory}/${project.artifactId}.zip" dest="${project.build.directory}"/>
-                                <echo message="moving resources"/>
+                                <echo message="download archive" />
+                                <get src="${ng-i18next.sourceUrl}" dest="${project.build.directory}/${project.artifactId}.zip" />
+                                <echo message="unzip archive" />
+                                <unzip src="${project.build.directory}/${project.artifactId}.zip" dest="${project.build.directory}" />
+                                <echo message="moving resources" />
                                 <move todir="${destDir}">
-                                    <fileset dir="${project.build.directory}/${project.artifactId}-${ng-i18next.version}/dist"/>
+                                    <fileset dir="${project.build.directory}/${project.artifactId}-${ng-i18next.version}/dist" />
                                 </move>
                             </target>
                         </configuration>
