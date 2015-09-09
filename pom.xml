@@ -11,15 +11,15 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ng-i18next</artifactId>
-    <version>0.3.3-SNAPSHOT</version>
+    <version>0.5.2-SNAPSHOT</version>
     <name>ng-i18next</name>
     <description>AngularJS module of i18next</description>
     <url>http://webjars.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <ng-i18next.version>0.3.2</ng-i18next.version>
-        <ng-i18next.sourceUrl>https://raw.github.com/archer96/ng-i18next/v${ng-i18next.version}/releases/v${ng-i18next.version}</ng-i18next.sourceUrl>
+        <ng-i18next.version>0.5.2</ng-i18next.version>
+        <ng-i18next.sourceUrl>https://github.com/i18next/ng-i18next/archive/v${ng-i18next.version}.zip</ng-i18next.sourceUrl>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${ng-i18next.version}</destDir>
     </properties>
 
@@ -57,32 +57,24 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>wagon-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
                 <executions>
                     <execution>
-                        <id>download-js</id>
                         <phase>process-resources</phase>
-                        <goals>
-                            <goal>download-single</goal>
-                        </goals>
+                        <goals><goal>run</goal></goals>
                         <configuration>
-                            <url>${ng-i18next.sourceUrl}</url>
-                            <fromFile>ng-i18next.js</fromFile>
-                            <toDir>${destDir}</toDir>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>download-min-js</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>download-single</goal>
-                        </goals>
-                        <configuration>
-                            <url>${ng-i18next.sourceUrl}</url>
-                            <fromFile>ng-i18next.min.js</fromFile>
-                            <toDir>${destDir}</toDir>
+                            <target>
+                                <echo message="download archive"/>
+                                <get src="${ng-i18next.sourceUrl}" dest="${project.build.directory}/${project.artifactId}.zip"/>
+                                <echo message="unzip archive"/>
+                                <unzip src="${project.build.directory}/${project.artifactId}.zip" dest="${project.build.directory}"/>
+                                <echo message="moving resources"/>
+                                <move todir="${destDir}">
+                                    <fileset dir="${project.build.directory}/${project.artifactId}-${ng-i18next.version}/dist"/>
+                                </move>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
